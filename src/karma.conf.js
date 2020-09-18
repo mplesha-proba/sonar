@@ -1,6 +1,3 @@
-// Karma configuration file, see link for more information
-// https://karma-runner.github.io/1.0/config/configuration-file.html
-
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -16,9 +13,22 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '../coverage'),
-      reports: ['html', 'lcovonly'],
+      dir: require('path').join(__dirname, './coverage/GreenCityClient'),
+      reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
+    },
+    customLaunchers: {
+      ChromeHeadless: {
+      base: 'Chrome',
+      flags: [
+        '--headless',
+        '--disable-gpu',
+        // no-sandbox - for running under docker
+        '--no-sandbox',
+        // Without a remote debugging port, Google Chrome exits immediately.
+        '--remote-debugging-port=9222',
+        ],
+      }
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
@@ -27,6 +37,6 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    browserNoActivityTimeout: 100000
+    restartOnFileChange: true
   });
 };
