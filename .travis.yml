@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "14"
+
+dist: bionic
+addons:
+  chrome: stable
+  sonarcloud:
+    organization: mplesha-proba
+
+cache:
+  directories:
+    - node_modules
+    - coverage
+
+install:
+  - npm install
+
+jobs:
+
+  include:
+    - stage: test
+      script:
+      - ng test --watch=false --progress=false --codeCoverage=true --browsers=ChromeHeadless
+      name: test app
+ 
