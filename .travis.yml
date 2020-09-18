@@ -21,6 +21,6 @@ jobs:
   include:
     - stage: test
       script:
-      - ng test --watch=false --progress=false --codeCoverage=true --browsers=ChromeHeadless
+      - ls && ng test --watch=false --progress=false --codeCoverage=true --browsers=ChromeHeadless
       name: test app
  
